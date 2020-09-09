@@ -40,13 +40,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	rsLessThan0, v0, err := rs0.Pop()
+	_, v0, err := rs0.Pop()
 	if err != nil {
-		log.Warn(err)
+		fmt.Printf("rs0.Pop(): %s\n", err)
 	}
 
-	fmt.Printf("v0: %s\trs0: %s\n", v0, rs0.Join(`, `))
-	fmt.Printf("v1: %s\trs1: %s\n", v1, rs1.Join(`, `))
-	fmt.Printf("v2: %s\trs2: %s\n", v2, rs2.Join(`, `))
-	fmt.Printf("v3: %s\trs3: %s\n", v3, rs3.Join(`, `))
+	fmt.Printf("v0: %-8v rs0: %s\n", v0, rs0.Join(`, `))
+	fmt.Printf("v1: %-8v rs1: %s\n", v1, rs1.Join(`, `))
+	fmt.Printf("v2: %-8v rs2: %s\n", v2, rs2.Join(`, `))
+	fmt.Printf("v3: %-8v rs3: %s\n", v3, rs3.Join(`, `))
 }

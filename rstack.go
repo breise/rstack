@@ -8,10 +8,15 @@ import (
 type RStack struct {
 	v interface{}
 	p *RStack
+	sz int
 }
 
 func (s *RStack) Push(v interface{}) *RStack {
-	return &RStack{v, s}
+	sz := 0
+	if s != nil {
+		sz = s.sz
+	}
+	return &RStack{v, s, sz + 1}
 }
 
 func New() *RStack {
@@ -28,24 +33,33 @@ func NewFromSlice(list []interface{}) *RStack {
 
 func (s *RStack) Pop() (*RStack, interface{}, error) {
 	if s == nil {
-		return nil, "", fmt.Errorf("%s", "Pop(): Canmot pop any empty RStack")
+		return nil, nil, fmt.Errorf("%s", "Pop(): Cannot pop any empty RStack")
 	}
 	return s.p, s.v, nil
 }
 
-func (s *RStack) ToSlice() []interface{} {
+func (s *RStack) Length() int {
 	if s == nil {
-		return []interface{}{}
+		return 0
+	} else {
+		return s.sz
 	}
-	return append(s.p.ToSlice(), s.v)
+}
+
+func (s *RStack) ToSlice() []interface{} {
+	rv := make([]interface{}, s.Length())
+	for p := s; p != nil; p = p.p {
+		rv[p.sz-1] = p.v
+	}
+	return rv
 }
 
 func (s *RStack) ToStringSlice() []string {
-	if s == nil {
-		return []string{}
+	rv := make([]string, s.Length())
+	for p := s; p != nil; p = p.p {
+		rv[p.sz-1] = fmt.Sprintf("%v", p.v)
 	}
-	v := fmt.Sprintf("%v", s.v)
-	return append(s.p.ToStringSlice(), v)
+	return rv
 }
 
 func (s *RStack) Join(sep string) string {
