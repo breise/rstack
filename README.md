@@ -92,7 +92,7 @@ This example features...
 - `Push()`
 - `Pop()`
 - `Join()`
-- required type assertion when using a `Pop()`ed value
+- required type assertion when using a `Pop()`'d value
 
 ```
 package main
