@@ -21,7 +21,7 @@ This example features...
 - `Push()`
 - `Pop()`
 - `Join()`
-- required type assertion when using a `Pop()`ed value
+- required type assertion when using a `Pop()`'d value
 
 ```
 package main
@@ -69,7 +69,7 @@ func main() {
 
 	_, v0, err := rs0.Pop()
 	if err != nil {
-		fmt.Printf("rs0.Pop(): %s\n", err)                 // rs0.Pop(): Pop(): Cannot pop any empty RStack
+		fmt.Printf("rs0.Pop(): %s\n", err) // rs0.Pop(): Pop(): Cannot pop any empty RStack
 	}
 
 	fmt.Printf("v0: %-8v rs0: %s\n", v0, rs0.Join(`, `)) // v0: <nil>    rs0: 
@@ -78,7 +78,7 @@ func main() {
 	fmt.Printf("v3: %-8v rs3: %s\n", v3, rs3.Join(`, `)) // v3: three    rs3: one, two, three
 
 	rs4 := rstack.NewFromSlice([]interface{}{"one", "two", "three", "four"})
-	fmt.Printf("rs4: %s\n", rs4.Join(`, `))              // rs4: one, two, three, four
+	fmt.Printf("rs4: %s\n", rs4.Join(`, `)) // rs4: one, two, three, four
 }
 ```
 
