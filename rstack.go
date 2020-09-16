@@ -6,8 +6,8 @@ import (
 )
 
 type RStack struct {
-	v interface{}
-	p *RStack
+	v  interface{}
+	p  *RStack
 	sz int
 }
 
@@ -57,7 +57,13 @@ func (s *RStack) ToSlice() []interface{} {
 func (s *RStack) ToStringSlice() []string {
 	rv := make([]string, s.Length())
 	for p := s; p != nil; p = p.p {
-		rv[p.sz-1] = fmt.Sprintf("%v", p.v)
+		var format string
+		if _, isByteSlice := p.v.([]byte); isByteSlice {
+			format = `%s`
+		} else {
+			format = `%v`
+		}
+		rv[p.sz-1] = fmt.Sprintf(format, p.v)
 	}
 	return rv
 }
